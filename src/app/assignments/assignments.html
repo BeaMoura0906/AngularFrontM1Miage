@@ -1,0 +1,19 @@
+<p>{{ titre }}</p>
+
+<h2>Liste des assignments</h2>
+
+<mat-divider></mat-divider>
+@for(assignment of assignments; track assignment.nom) {
+    @if ( assignment.rendu ) {
+        <p>
+            Le devoir {{ assignment.nom }} a été rendu le {{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}.
+        </p>
+        <mat-divider></mat-divider>
+    } 
+    @else {
+        <p>
+            Le devoir {{ assignment.nom }} doit être rendu avant le {{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}.
+        </p>
+        <mat-divider></mat-divider>
+    }
+}
