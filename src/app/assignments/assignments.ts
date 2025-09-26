@@ -16,28 +16,12 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrl: './assignments.css'
 })
 export class Assignments implements OnInit {
+  ajoutActive = false;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    setTimeout(() => this.ajoutActive = true, 2000);
   }
 
   titre = 'Mon application sur les Assignments !';
-
-  /*
-  assignments = [
-    { 
-      nom: 'Angular Project', 
-      dateDeRendu: '2025-12-31',
-      rendu: false  
-    } , 
-    { 
-      nom: 'TypeScript Basics', 
-      dateDeRendu: '2025-11-15',
-      rendu: true  
-    } 
-  ];
-  */
-  
-  
 
   nomDevoir = '';
   dateDeRendu!: Date;

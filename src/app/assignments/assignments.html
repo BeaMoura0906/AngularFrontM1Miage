@@ -1,7 +1,7 @@
 <p>{{ titre }}</p>
 
 <h3>Ajouter un assignment</h3>
-<form (submit)="onSubmit()" class="form">
+<form ngForm #assignmentForm (submit)="onSubmit(); assignmentForm.reset()" class="form">
   <mat-form-field>
     <input matInput
            placeholder="Nom du devoir"
@@ -19,7 +19,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-stroked-button color="primary" type="submit">
+  <button mat-stroked-button color="primary" type="submit" [disabled]="!ajoutActive">
     Ajouter
   </button>
 </form>
