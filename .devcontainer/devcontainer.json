@@ -1,0 +1,27 @@
+{
+	"name": "myAngular",
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers-contrib/features/jshint:2": {
+			"version": "latest"
+		}
+	},
+	"postCreateCommand": "npm install",
+	"customizations": {
+		"codespaces": {
+		  "openFiles": [
+			"README.md"
+		  ]
+		},
+		"vscode": {
+			"extensions": [
+				"Angular.ng-template",
+				"johnpapa.angular-essentials",
+				"GitHub.copilot"
+			]
+		}
+	  }	  
+}
