@@ -1,5 +1,29 @@
 <p>{{ titre }}</p>
 
+<h3>Ajouter un assignment</h3>
+<form (submit)="onSubmit()" class="form">
+  <mat-form-field>
+    <input matInput
+           placeholder="Nom du devoir"
+           [(ngModel)]="nomDevoir"
+           name="nomDevoir">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           [matDatepicker]="picker"
+           placeholder="Date de rendu"
+           [(ngModel)]="dateDeRendu"
+           name="dateDeRendu">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-stroked-button color="primary" type="submit">
+    Ajouter
+  </button>
+</form>
+
 <h2>Liste des assignments</h2>
 
 <mat-divider></mat-divider>
