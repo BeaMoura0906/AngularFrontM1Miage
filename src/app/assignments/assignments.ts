@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { Rendu } from '../shared/rendu';
+import { NonRendu } from '../shared/non-rendu';
 @Component({
   selector: 'app-assignments',
-  imports: [DatePipe, MatDividerModule],
+  imports: [DatePipe, MatDividerModule, Rendu, NonRendu],
   templateUrl: './assignments.html',
   styleUrl: './assignments.css'
 })
@@ -23,5 +24,9 @@ export class Assignments {
       rendu: true  
     } 
   ];
+
+  getBackgroundColor(assignment: any) {
+    return assignment.rendu ? 'lightgreen' : 'lightcoral';
+  }
 
 }
