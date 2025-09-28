@@ -1,0 +1,9 @@
+
+.toolbar-title {
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
