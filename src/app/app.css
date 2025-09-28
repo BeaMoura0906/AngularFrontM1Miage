@@ -1,9 +1,25 @@
+.app-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  width: 260px;
+}
 
 .toolbar-title {
-    margin-left: 8px;
-    font-weight: 600;
+  margin-left: 8px;
+  font-weight: 600;
 }
 
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.page {
+  padding: 16px;
 }

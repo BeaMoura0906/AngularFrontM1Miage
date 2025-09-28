@@ -1,21 +1,41 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button aria-label="Menu">
-        <mat-icon>menu</mat-icon>
-    </button>
+<mat-sidenav-container class="app-container">
+    <mat-sidenav #drawer mode="side">
+        <mat-nav-list>
+        <a mat-list-item routerLink="/assignments"
+            (click)="drawer.close()">Liste des devoirs</a>
+        <a mat-list-item routerLink="/add"
+            (click)="drawer.close()">Ajout d'un devoir</a>
+        <a mat-list-item routerLink="/edit"
+            (click)="drawer.close()">Modification d'un devoir</a>
+        <a mat-list-item routerLink="/delete"
+            (click)="drawer.close()">Suppression d'un devoir</a>
+        <a mat-list-item routerLink="/seed"
+            (click)="drawer.close()">Génération de données de test</a>
+        </mat-nav-list>
+    </mat-sidenav>
 
-    <button mat-icon-button aria-label="Accueil">
-        <mat-icon>home</mat-icon>
-    </button>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+        <button mat-icon-button aria-label="Menu" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
 
-    <span class="toolbar-title">Assignments App</span>
+        <button mat-icon-button aria-label="Accueil" routerLink="/">
+            <mat-icon>home</mat-icon>
+        </button>
 
+        <span class="toolbar-title">Assignments App</span>
+        <span class="spacer"></span>
 
-    <span class="spacer"></span>
+        <button mat-icon-button aria-label="Connexion">
+            <mat-icon>login</mat-icon>
+        </button>
+        </mat-toolbar>
 
-    <button mat-icon-button aria-label="Connexion">
-        <mat-icon>login</mat-icon>
-    </button>
-</mat-toolbar>
+        <div class="page">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
-<app-assignments></app-assignments>
 
