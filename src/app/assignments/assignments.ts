@@ -12,52 +12,38 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AssignmentDetail } from "./assignment-detail/assignment-detail";
 import { MatList, MatListSubheaderCssMatStyler, MatListItem  } from "@angular/material/list";
 import { Assignment } from './assignment.model';
+import { AddAssignment } from "./add-assignment/add-assignment";
 
 @Component({
   selector: 'app-assignments',
   standalone: true,
-  imports: [DatePipe, MatDividerModule, Rendu, NonRendu, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, AssignmentDetail, MatList, MatListSubheaderCssMatStyler, MatListItem],
+  imports: [DatePipe, MatDividerModule, Rendu, NonRendu, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, AssignmentDetail, MatList, MatListSubheaderCssMatStyler, MatListItem, AddAssignment],
   templateUrl: './assignments.html',
   styleUrl: './assignments.css'
 })
 
 export class Assignments implements OnInit {
-  ajoutActive = false;
-  ngOnInit(): void {
-    setTimeout(() => this.ajoutActive = true, 2000);
+  formVisible = false;
+  onAddAssignmentBtnClick() {
+    this.formVisible = true;
   }
 
-  titre = 'Mon application sur les Assignments !';
-
-  nomDevoir = '';
-  dateDeRendu!: Date;
+  ngOnInit(): void {
+    if(this.assignments.length > 0) {
+      this.assignmentSelectionne = this.assignments[0];
+    }
+  }
 
   assignments: Assignment[] = [];
 
-  // Temporaire
-  private generateId(): number {
-    return (this.assignments.length
-      ? Math.max(...this.assignments.map(a => (a as any).id ?? 0))
-      : 0) + 1;
+  onNouvelAssignment(assignment: Assignment) {
+    this.assignments.push(assignment);
+    this.formVisible = false;
+    if (!this.assignmentSelectionne && this.assignments.length > 0) {
+      this.assignmentSelectionne = this.assignments[0];
+    }
   }
 
-  onSubmit() {
-    if( !this.nomDevoir || !this.dateDeRendu) return;
-
-    const id = this.generateId();
-
-    const newAssignment: Assignment ={
-      id,
-      nom: this.nomDevoir,
-      dateDeRendu: this.dateDeRendu,
-      rendu: false
-    };
-    
-    this.assignments.push(newAssignment);
-
-    this.nomDevoir = '';
-    this.dateDeRendu = new Date();
-  }
   
   assignmentSelectionne!:Assignment;
 

@@ -6,9 +6,8 @@
     background-color: lightcoral;
 }
 
-.form {
+.top-actions {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 8px;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }

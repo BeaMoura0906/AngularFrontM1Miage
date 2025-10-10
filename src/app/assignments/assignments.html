@@ -1,36 +1,23 @@
-<p>{{ titre }}</p>
 
-<h3>Ajouter un assignment</h3>
-<form ngForm #assignmentForm (submit)="onSubmit(); assignmentForm.reset()" class="form">
-  <mat-form-field>
-    <input matInput
-           placeholder="Nom du devoir"
-           [(ngModel)]="nomDevoir"
-           name="nomDevoir"
-           required>
-  </mat-form-field>
+<div class="top-actions">
+  @if (!formVisible) {
+    <button mat-raised-button color="accent" (click)="onAddAssignmentBtnClick()">
+      Ajouter un assignment
+    </button>
+  }
+  
+</div>
 
-  <mat-form-field>
-    <input matInput
-           [matDatepicker]="picker"
-           placeholder="Date de rendu"
-           [(ngModel)]="dateDeRendu"
-           name="dateDeRendu"
-           required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+@if (formVisible) {
+  <app-add-assignment (nouvelAssignment)="onNouvelAssignment($event)"></app-add-assignment>
+}
 
-  <button mat-stroked-button color="primary" type="submit" [disabled]="!ajoutActive">
-    Ajouter
-  </button>
-</form>
+<h1>Liste des assignments</h1>
 
-<h2>Liste des assignments</h2>
-
-<mat-divider></mat-divider>
 <mat-list>
   @for(assignment of assignments; track assignment.nom) {
+    <mat-divider></mat-divider>
+
     <h3 mat-subheader>{{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}</h3>
 
     <mat-list-item (click)="assignmentSelectionne = assignment" style="cursor: pointer;">
@@ -50,5 +37,5 @@
 
 <mat-divider></mat-divider>
 
-<h1>Détails d'un assignment</h1>
+<h2>Détails d'un assignment</h2>
 <app-assignment-detail [assignmentTransmis]="assignmentSelectionne"></app-assignment-detail>
