@@ -1,0 +1,5 @@
+@if (assignmentTransmis) {
+    <h2>Assignment : {{assignmentTransmis.nom}} </h2>
+    <p>Date de rendu : {{assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy'}}</p>
+    <p>Statut : <strong>{{assignmentTransmis.rendu ? 'Rendu' : 'Non rendu'}}</strong></p>
+}
