@@ -1,0 +1,19 @@
+.assignment-card {
+  margin-top: 12px;
+}
+
+.status {
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.status.rendu {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.status.non-rendu {
+  background: #fdecea;
+  color: #b02a37;
+}
