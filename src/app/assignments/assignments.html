@@ -38,4 +38,7 @@
 <mat-divider></mat-divider>
 
 <h2>Détails d'un assignment</h2>
-<app-assignment-detail [assignmentTransmis]="assignmentSelectionne"></app-assignment-detail>
+<app-assignment-detail 
+  [assignmentTransmis]="assignmentSelectionne"
+  (deleteAssignment)="onDelete($event)">
+</app-assignment-detail>

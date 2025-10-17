@@ -17,3 +17,9 @@
   background: #fdecea;
   color: #b02a37;
 }
+
+.deleteBtn {
+  margin-left: auto;
+  background-color: #b02a37;
+  color: white;
+}

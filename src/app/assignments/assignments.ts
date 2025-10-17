@@ -45,9 +45,15 @@ export class Assignments implements OnInit {
   }
 
   
-  assignmentSelectionne!:Assignment;
+  assignmentSelectionne?:Assignment;
 
   assignmentClique(assignment: Assignment) {
     this.assignmentSelectionne = assignment;
   }
+
+  onDelete(a: Assignment) {
+    this.assignments = this.assignments.filter(x => x.id !== a.id);
+    this.assignmentSelectionne = undefined;
+  }
+
 }

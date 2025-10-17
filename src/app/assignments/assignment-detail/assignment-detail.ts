@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -15,9 +15,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class AssignmentDetail {
   @Input() assignmentTransmis?: Assignment;
 
+  @Output() deleteAssignment = new EventEmitter<Assignment>();
+
   onAssignmentRendu() {
     if(!this.assignmentTransmis) return;
     this.assignmentTransmis!.rendu = true;
+  }
+
+  onDeleteClick() {
+    if(!this.assignmentTransmis) return;
+    this.deleteAssignment.emit(this.assignmentTransmis);
   }
 
 }
