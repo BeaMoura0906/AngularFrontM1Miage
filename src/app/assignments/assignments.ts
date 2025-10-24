@@ -13,6 +13,7 @@ import { AssignmentDetail } from "./assignment-detail/assignment-detail";
 import { MatList, MatListSubheaderCssMatStyler, MatListItem  } from "@angular/material/list";
 import { Assignment } from './assignment.model';
 import { AddAssignment } from "./add-assignment/add-assignment";
+import { AssignmentsService } from '../assignments.service';
 
 @Component({
   selector: 'app-assignments',
@@ -24,6 +25,10 @@ import { AddAssignment } from "./add-assignment/add-assignment";
 
 export class Assignments implements OnInit {
   formVisible = false;
+  assignments: Assignment[] = [];
+
+  constructor (private assignmentService:AssignmentsService) {}
+
   onAddAssignmentBtnClick() {
     this.formVisible = true;
   }
@@ -32,9 +37,8 @@ export class Assignments implements OnInit {
     if(this.assignments.length > 0) {
       this.assignmentSelectionne = this.assignments[0];
     }
+    this.assignments = this.assignmentService.getAssignments();
   }
-
-  assignments: Assignment[] = [];
 
   onNouvelAssignment(assignment: Assignment) {
     this.assignments.push(assignment);
