@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AssignmentsService } from '../../assignments.service';  
+import { AssignmentsService } from '../../shared/assignments.service';  
 
 @Component({
   selector: 'app-assignment-detail',

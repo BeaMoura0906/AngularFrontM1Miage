@@ -13,7 +13,7 @@ import { AssignmentDetail } from "./assignment-detail/assignment-detail";
 import { MatList, MatListSubheaderCssMatStyler, MatListItem  } from "@angular/material/list";
 import { Assignment } from './assignment.model';
 import { AddAssignment } from "./add-assignment/add-assignment";
-import { AssignmentsService } from '../assignments.service';
+import { AssignmentsService } from '../shared/assignments.service';
 
 @Component({
   selector: 'app-assignments',

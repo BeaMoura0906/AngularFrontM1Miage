@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Assignment } from './assignments/assignment.model';
+import { Assignment } from '../assignments/assignment.model';
 import { Observable, of } from 'rxjs';
+import { Logging } from './logging';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,10 @@ export class AssignmentsService {
    */
   addAssignment(assignment: Assignment): Observable<string> {
     this.assignments.push(assignment);
-    return of("Assignment ajoute");
+
+    this.loggingService.log(assignment.nom, "ajouté");
+
+    return of("Assignment ajouté !");
   } 
 
   /**
@@ -60,6 +64,7 @@ export class AssignmentsService {
     const index = this.assignments.findIndex(a => a.id === assignment.id);
     if (index !== -1) {
       this.assignments[index] = assignment;
+      this.loggingService.log(assignment.nom, "mis à jour");
       return of("Assignment mis à jour");
     } else {
       return of("Assignment non trouvé");
@@ -75,17 +80,19 @@ export class AssignmentsService {
     const index = this.assignments.findIndex(a => a.id === assignment.id);
     if (index !== -1) {
       this.assignments.splice(index, 1);
+      this.loggingService.log(assignment.nom, "supprimé");
       return of("Assignment supprimé");
     } else {
       return of("Assignment non trouvé");
     }
   }
-
+  
   /**
    * Constructeur de la classe AssignmentsService
    * Affiche un message pour indiquer que le service a été créé
    */
-  constructor() { 
-    console.log("AssignmentsService créé !");
-  }
+  constructor(private loggingService: Logging) {
+    
+  } 
+    
 }
