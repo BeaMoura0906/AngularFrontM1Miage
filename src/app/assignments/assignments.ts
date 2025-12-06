@@ -34,10 +34,10 @@ export class Assignments implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.assignments.length > 0) {
-      this.assignmentSelectionne = this.assignments[0];
-    }
-    this.assignments = this.assignmentService.getAssignments();
+    this.assignmentService.getAssignments()
+      .subscribe((assignments) => {
+        this.assignments = assignments;
+      });
   }
 
   onNouvelAssignment(assignment: Assignment) {

@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Assignment } from './assignments/assignment.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * @class AssignmentsService 
+ * Service pour la gestion des assignments
+ */
 export class AssignmentsService {
   
   assignments: Assignment[] = [
@@ -27,10 +33,18 @@ export class AssignmentsService {
     }
   ];
 
-  getAssignments(): Assignment[] {
-    return this.assignments;
+  /**
+   * Renvoie un Observable qui contient la liste des assignments
+   * @returns Observable<Assignment[]>
+   */
+  getAssignments(): Observable<Assignment[]> {
+    return of(this.assignments);
   }
 
+  /**
+   * Constructeur de la classe AssignmentsService
+   * Affiche un message pour indiquer que le service a été créé
+   */
   constructor() { 
     console.log("AssignmentsService créé !");
   }
