@@ -52,6 +52,36 @@ export class AssignmentsService {
   } 
 
   /**
+   * Met a jour un assignment dans la liste des assignments
+   * @param {Assignment} assignment - L'assignment a mettre a jour
+   * @returns Observable<string> - Un Observable qui contient le message de confirmation de la mise a jour de l'assignment
+   */
+  updateAssignment(assignment: Assignment): Observable<string> {
+    const index = this.assignments.findIndex(a => a.id === assignment.id);
+    if (index !== -1) {
+      this.assignments[index] = assignment;
+      return of("Assignment mis à jour");
+    } else {
+      return of("Assignment non trouvé");
+    }
+  }
+
+  /**
+   * Supprime un assignment de la liste des assignments
+   * @param {Assignment} assignment - L'assignment a supprimer
+   * @returns Observable<string> - Un Observable qui contient le message de confirmation de la suppression de l'assignment
+   */
+  deleteAssignment(assignment: Assignment): Observable<string> {
+    const index = this.assignments.findIndex(a => a.id === assignment.id);
+    if (index !== -1) {
+      this.assignments.splice(index, 1);
+      return of("Assignment supprimé");
+    } else {
+      return of("Assignment non trouvé");
+    }
+  }
+
+  /**
    * Constructeur de la classe AssignmentsService
    * Affiche un message pour indiquer que le service a été créé
    */

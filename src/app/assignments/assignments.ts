@@ -73,9 +73,13 @@ export class Assignments implements OnInit {
     this.assignmentSelectionne = assignment;
   }
 
+
   onDelete(a: Assignment) {
-    this.assignments = this.assignments.filter(x => x.id !== a.id);
-    this.assignmentSelectionne = undefined;
+    this.assignmentService.deleteAssignment(a)
+      .subscribe((message) => {
+        console.log(message);
+        this.assignmentSelectionne = undefined;
+      });
   }
 
 }
