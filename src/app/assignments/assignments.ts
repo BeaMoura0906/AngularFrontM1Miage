@@ -27,12 +27,23 @@ export class Assignments implements OnInit {
   formVisible = false;
   assignments: Assignment[] = [];
 
+  /**
+   * Constructeur de la classe Assignments
+   * @param {AssignmentsService} assignmentService - Le service AssignmentsService
+   */
   constructor (private assignmentService:AssignmentsService) {}
 
+/**
+ * Affiche le formulaire d'ajout d'un assignment
+ */
   onAddAssignmentBtnClick() {
     this.formVisible = true;
   }
 
+
+/**
+ * Initialise la liste des assignments en récupérant la liste des assignments du service AssignmentsService
+ */
   ngOnInit(): void {
     this.assignmentService.getAssignments()
       .subscribe((assignments) => {
@@ -40,12 +51,19 @@ export class Assignments implements OnInit {
       });
   }
 
+  /**
+   * Ajoute un assignment à la liste des assignments
+   * @param {Assignment} assignment - L'assignment à ajouter
+   */
   onNouvelAssignment(assignment: Assignment) {
-    this.assignments.push(assignment);
-    this.formVisible = false;
-    if (!this.assignmentSelectionne && this.assignments.length > 0) {
-      this.assignmentSelectionne = this.assignments[0];
-    }
+    this.assignmentService.addAssignment(assignment)
+      .subscribe((message) => {
+        console.log(message);
+        this.formVisible = false;
+      });
+      if(!this.assignmentSelectionne && this.assignments.length > 0) {
+        this.assignmentSelectionne = this.assignments[0];
+      }
   }
 
   

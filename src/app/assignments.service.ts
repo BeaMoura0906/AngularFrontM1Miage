@@ -42,6 +42,16 @@ export class AssignmentsService {
   }
 
   /**
+   * Ajoute un assignment a la liste des assignments
+   * @param {Assignment} assignment - L'assignment a ajouter
+   * @returns Observable<string> - Un Observable qui contient le message de confirmation de l'ajout de l'assignment
+   */
+  addAssignment(assignment: Assignment): Observable<string> {
+    this.assignments.push(assignment);
+    return of("Assignment ajoute");
+  } 
+
+  /**
    * Constructeur de la classe AssignmentsService
    * Affiche un message pour indiquer que le service a été créé
    */
