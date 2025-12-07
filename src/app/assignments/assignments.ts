@@ -12,19 +12,34 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AssignmentDetail } from "./assignment-detail/assignment-detail";
 import { MatList, MatListSubheaderCssMatStyler, MatListItem  } from "@angular/material/list";
 import { Assignment } from './assignment.model';
-import { AddAssignment } from "./add-assignment/add-assignment";
 import { AssignmentsService } from '../shared/assignments.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
   standalone: true,
-  imports: [DatePipe, MatDividerModule, Rendu, NonRendu, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, AssignmentDetail, MatList, MatListSubheaderCssMatStyler, MatListItem, AddAssignment],
+  imports: [
+    DatePipe, 
+    MatDividerModule, 
+    Rendu, 
+    NonRendu, 
+    FormsModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    AssignmentDetail, 
+    MatList, 
+    MatListSubheaderCssMatStyler, 
+    MatListItem,
+    RouterLink
+  ],
   templateUrl: './assignments.html',
   styleUrl: './assignments.css'
 })
 
 export class Assignments implements OnInit {
-  formVisible = false;
   assignments: Assignment[] = [];
 
   /**
@@ -32,14 +47,6 @@ export class Assignments implements OnInit {
    * @param {AssignmentsService} assignmentService - Le service AssignmentsService
    */
   constructor (private assignmentService:AssignmentsService) {}
-
-/**
- * Affiche le formulaire d'ajout d'un assignment
- */
-  onAddAssignmentBtnClick() {
-    this.formVisible = true;
-  }
-
 
 /**
  * Initialise la liste des assignments en récupérant la liste des assignments du service AssignmentsService
@@ -50,30 +57,22 @@ export class Assignments implements OnInit {
         this.assignments = assignments;
       });
   }
-
-  /**
-   * Ajoute un assignment à la liste des assignments
-   * @param {Assignment} assignment - L'assignment à ajouter
-   */
-  onNouvelAssignment(assignment: Assignment) {
-    this.assignmentService.addAssignment(assignment)
-      .subscribe((message) => {
-        console.log(message);
-        this.formVisible = false;
-      });
-      if(!this.assignmentSelectionne && this.assignments.length > 0) {
-        this.assignmentSelectionne = this.assignments[0];
-      }
-  }
-
   
   assignmentSelectionne?:Assignment;
 
+  /**
+   * Sélectionne un assignment pour afficher ses détails
+   * @param {Assignment} assignment - L'assignment à sélectionner
+   */
   assignmentClique(assignment: Assignment) {
     this.assignmentSelectionne = assignment;
   }
 
 
+  /**
+   * Supprime l'assignment selectionné de la liste des assignments
+   * @param {Assignment} a - L'assignment a supprimer
+   */
   onDelete(a: Assignment) {
     this.assignmentService.deleteAssignment(a)
       .subscribe((message) => {

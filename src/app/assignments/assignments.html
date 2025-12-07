@@ -1,16 +1,8 @@
-
 <div class="top-actions">
-  @if (!formVisible) {
-    <button mat-raised-button color="accent" (click)="onAddAssignmentBtnClick()">
-      Ajouter un assignment
-    </button>
-  }
-  
+  <button mat-raised-button color="accent" routerLink="/add">
+    Ajouter un assignment
+  </button>
 </div>
-
-@if (formVisible) {
-  <app-add-assignment (nouvelAssignment)="onNouvelAssignment($event)"></app-add-assignment>
-}
 
 <h1>Liste des assignments</h1>
 
