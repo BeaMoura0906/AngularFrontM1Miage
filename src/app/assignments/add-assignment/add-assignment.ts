@@ -66,14 +66,11 @@ export class AddAssignment {
   onSubmit() {
     if (!this.nomDevoir || !this.dateDeRendu) return;
 
-    const id = this.generateId();
-
-    const nouvelAssignment = new Assignment(
-      id,
-      this.nomDevoir,
-      this.dateDeRendu,
-      false
-    );
+    const nouvelAssignment = new Assignment();
+    nouvelAssignment.id = this.generateId();
+    nouvelAssignment.nom = this.nomDevoir;
+    nouvelAssignment.dateDeRendu = this.dateDeRendu;
+    nouvelAssignment.rendu = false;
 
     // Ajout de l'assignment au service
     this.assignmentsService.addAssignment(nouvelAssignment)
@@ -81,8 +78,5 @@ export class AddAssignment {
         console.log(message);
         this.router.navigate(['/home']);
       });
-
-    this.nomDevoir = '';
-    this.dateDeRendu = new Date();
   }
 }

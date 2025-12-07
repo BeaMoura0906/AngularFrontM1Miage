@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
 import { Observable, of } from 'rxjs';
 import { Logging } from './logging';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,33 +14,19 @@ import { Logging } from './logging';
  */
 export class AssignmentsService {
   
-  assignments: Assignment[] = [
-    { 
-      id: 1,
-      nom: "TP Angular", 
-      dateDeRendu: new Date("2025-12-07"),
-      rendu: false
-    }, 
-    { 
-      id: 2,
-      nom: "Projet Java",
-      dateDeRendu: new Date("2025-11-15"),
-      rendu: true
-    },
-    { 
-      id: 3,
-      nom: "Examen HTML",
-      dateDeRendu: new Date("2025-11-20"),
-      rendu: false
-    }
-  ];
+  private apiUrl = 'http://localhost:8010/api/assignments';
+
+  constructor(
+    private http: HttpClient,
+    private loggingService: Logging
+  ) {} 
 
   /**
    * Renvoie un Observable qui contient la liste des assignments
    * @returns Observable<Assignment[]>
    */
   getAssignments(): Observable<Assignment[]> {
-    return of(this.assignments);
+    return this.http.get<Assignment[]>(this.apiUrl);
   }
 
   /**
@@ -48,8 +35,7 @@ export class AssignmentsService {
    * @returns Observable<Assignment | undefined> - Un Observable qui contient l'assignment correspondant a l'ID fourni
    */
   getAssignment(id: number): Observable<Assignment | undefined> {
-    const assignment = this.assignments.find(a => a.id === id);
-    return of(assignment);
+    return this.http.get<Assignment | undefined>(`${this.apiUrl}/${id}`);
   }
 
   /**
@@ -58,11 +44,16 @@ export class AssignmentsService {
    * @returns Observable<string> - Un Observable qui contient le message de confirmation de l'ajout de l'assignment
    */
   addAssignment(assignment: Assignment): Observable<string> {
-    this.assignments.push(assignment);
-
-    this.loggingService.log(assignment.nom, "ajouté");
-
-    return of("Assignment ajouté !");
+    return new Observable<string>(observer => {
+      this.http.post<any>(this.apiUrl, assignment).subscribe({
+        next: (res) => {
+          this.loggingService.log(assignment.nom, 'ajouté');
+          observer.next(res?.message || 'Assignment ajouté !');
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
   } 
 
   /**
@@ -71,14 +62,16 @@ export class AssignmentsService {
    * @returns Observable<string> - Un Observable qui contient le message de confirmation de la mise a jour de l'assignment
    */
   updateAssignment(assignment: Assignment): Observable<string> {
-    const index = this.assignments.findIndex(a => a.id === assignment.id);
-    if (index !== -1) {
-      this.assignments[index] = assignment;
-      this.loggingService.log(assignment.nom, "mis à jour");
-      return of("Assignment mis à jour");
-    } else {
-      return of("Assignment non trouvé");
-    }
+    return new Observable<string>(observer => {
+      this.http.put<any>(this.apiUrl, assignment).subscribe({
+        next: (res) => {
+          this.loggingService.log(assignment.nom, 'mis à jour');
+          observer.next(res?.message || 'Assignment mis à jour');
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
   }
 
   /**
@@ -87,22 +80,16 @@ export class AssignmentsService {
    * @returns Observable<string> - Un Observable qui contient le message de confirmation de la suppression de l'assignment
    */
   deleteAssignment(assignment: Assignment): Observable<string> {
-    const index = this.assignments.findIndex(a => a.id === assignment.id);
-    if (index !== -1) {
-      this.assignments.splice(index, 1);
-      this.loggingService.log(assignment.nom, "supprimé");
-      return of("Assignment supprimé");
-    } else {
-      return of("Assignment non trouvé");
-    }
+    return new Observable<string>(observer => {
+      this.http.delete<any>(`${this.apiUrl}/${assignment._id}`).subscribe({
+        next: (res) => {
+          this.loggingService.log(assignment.nom, 'supprimé');
+          observer.next(res?.message || 'Assignment supprimé');
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
   }
   
-  /**
-   * Constructeur de la classe AssignmentsService
-   * Affiche un message pour indiquer que le service a été créé
-   */
-  constructor(private loggingService: Logging) {
-    
-  } 
-    
 }
