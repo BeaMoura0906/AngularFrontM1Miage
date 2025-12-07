@@ -27,9 +27,10 @@
         <span class="toolbar-title"><a routerLink="/home" class="link-home">Assignment App</a></span>
         <span class="spacer"></span>
 
-        <button mat-icon-button aria-label="Connexion">
-            <mat-icon>login</mat-icon>
-        </button>
+        <mat-slide-toggle (click)="onToggleAdmin()">
+            Admin
+        </mat-slide-toggle>
+
         </mat-toolbar>
 
         <div class="page">

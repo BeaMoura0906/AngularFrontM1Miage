@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from '../../shared/assignments.service';  
+import { AuthService } from '../../shared/auth';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -22,13 +23,22 @@ export class AssignmentDetail {
    * @param {AssignmentsService} assignmentsService - Le service AssignmentsService
    * @param {ActivatedRoute} route - Le routeur actif
    * @param {Router} router - Le routeur
+   * @param {AuthService} authService - Le service AuthService
    */
   constructor(
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
+  /**
+   * Returns true if the user is an admin, false otherwise.
+   * @returns boolean
+   */
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
   
   /**
    * Initialise la liste des assignments en récupérant l'assignment correspondant à l'ID fourni
