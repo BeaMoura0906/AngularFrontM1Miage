@@ -27,9 +27,24 @@
         <span class="toolbar-title"><a routerLink="/home" class="link-home">Assignment App</a></span>
         <span class="spacer"></span>
 
-        <mat-slide-toggle (click)="onToggleAdmin()">
-            Admin
-        </mat-slide-toggle>
+        <span class="spacer"></span>
+
+        @if (!isLogged()) {
+            <button
+                mat-icon-button
+                aria-label="Connexion"
+                routerLink="/login">
+                <mat-icon>login</mat-icon>
+            </button>
+        }
+        @else {
+            <button
+                mat-icon-button
+                aria-label="Déconnexion"
+                (click)="logout()">
+                <mat-icon>logout</mat-icon>
+            </button>
+        }
 
         </mat-toolbar>
 

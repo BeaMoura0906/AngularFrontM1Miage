@@ -1,34 +1,73 @@
 import { Injectable } from '@angular/core';
 
+export type UserRole = 'user' | 'admin';
+
+interface User {
+  login: string;
+  password: string;
+  role: UserRole;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn = false;
+  // PROVISOIRE : data en dur
+  private users: User[] = [
+    { login: 'admin', password: 'admin', role: 'admin' },
+    { login: 'user',  password: 'user',  role: 'user'  }
+  ];
 
-  
+  private currentUser: User | null = null;
+
   /**
-   * Sets the loggedIn flag to true and logs a message to the console.
-   * This simulates a user logging in.
+   * Tente de se connecter
+   * @returns true si ok, false sinon
    */
-  logIn() {
-    this.loggedIn = true;
-    console.log('AuthService: logIn, loggedIn =', this.loggedIn);
+  login(login: string, password: string): boolean {
+    const found = this.users.find(
+      u => u.login === login && u.password === password
+    );
+
+    if (found) {
+      this.currentUser = found;
+      console.log('Connecté en tant que', found.login, 'role', found.role);
+      return true;
+    }
+
+    this.currentUser = null;
+    return false;
   }
 
   /**
-   * Sets the loggedIn flag to false and logs a message to the console.
-   * This simulates a user logging out.
+   * Déconnecte l'utilisateur actuel
    */
-  logOut() {
-    this.loggedIn = false;
-    console.log('AuthService: logOut, loggedIn =', this.loggedIn);
+  logout(): void {
+    console.log('Déconnexion');
+    this.currentUser = null;
   }
 
   /**
-   * Returns true if the user is logged in, false otherwise.
+   * Vérifie si l'utilisateur est connecté
+   * @returns true si l'utilisateur est connecté, false sinon
+   */
+  isLogged(): boolean {
+    return this.currentUser !== null;
+  }
+
+  /**
+   * Vérifie si l'utilisateur est un admin
+   * @returns true si l'utilisateur est un admin, false sinon
    */
   isAdmin(): boolean {
-    return this.loggedIn;
+    return this.currentUser?.role === 'admin';
+  }
+
+  /**
+   * Récupère l'utilisateur actuellement connecté
+   * @returns L'utilisateur actuellement connecté, ou null si aucun utilisateur connecté
+   */
+  getCurrentUser(): User | null {
+    return this.currentUser;
   }
 }

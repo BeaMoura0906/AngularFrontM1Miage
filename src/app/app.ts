@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AuthService } from './shared/auth';
 
 @Component({
@@ -20,8 +19,7 @@ import { AuthService } from './shared/auth';
     MatDividerModule, 
     MatToolbarModule, 
     MatSidenavModule, 
-    MatListModule, 
-    MatSlideToggleModule
+    MatListModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -31,28 +29,37 @@ export class App {
   protected readonly title = signal('assignment-app');
 
   /**
-   * Constructor 
-   * @param authService 
+   * Constructeur de la classe App
+   * @param {AuthService} authService - Le service AuthService
+   * @param {Router} router - Le routeur
    */
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
+  
   /**
-   * Toggles the admin mode.
-   * If the user is logged in, it logs the user out.
-   * If the user is not logged in, it logs the user in.
+   * Vérifie si l'utilisateur est connecté avec authService
+   * @returns true si l'utilisateur est connecté, false sinon
    */
-  onToggleAdmin() {
-    if (this.authService.loggedIn) {
-      this.authService.logOut();
-    } else {
-      this.authService.logIn();
-    }
+  isLogged() {
+    return this.authService.isLogged();
   }
 
   /**
-   * Returns true if the user is logged in, false otherwise.
+   * Vérifie si l'utilisateur est un admin avec authService
+   * @returns true si l'utilisateur est un admin, false sinon
    */
-  isLoggedIn() {
+  isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  /**
+   * Deconnecte l'utilisateur actuel avec authService
+   */
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

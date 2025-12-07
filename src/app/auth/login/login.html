@@ -1,0 +1,36 @@
+<h2>Connexion</h2>
+
+<form ngForm (ngSubmit)="onSubmit()" class="form">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Login"
+      name="login"
+      [(ngModel)]="login"
+      required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Mot de passe"
+      name="password"
+      [(ngModel)]="password"
+      type="password"
+      required>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!login || !password">
+    Se connecter
+  </button>
+
+  @if (loginFailed) {
+    <p style="color: red; margin-top: 8px;">
+      Login ou mot de passe incorrect.
+    </p>
+  }
+</form>

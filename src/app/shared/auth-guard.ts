@@ -24,23 +24,24 @@ export class AuthGuard implements CanActivate {
 
   
   /**
-   * Méthode qui permet de vérifier si l'utilisateur a le droit d'accès à la route demandée.
-   * Elle renvoie true si l'utilisateur a le droit d'accès, false sinon.
-   * Si l'accès est refusé, elle log un message d'erreur et redirige l'utilisateur vers /home.
-   * @param route - Un snapshot de la route actuelle.
-   * @param state - Un snapshot de l'état de la route.
-   * @returns Un boolean qui indique si l'utilisateur a le droit d'accès.
+   * Vérifie si l'utilisateur est connecté et si il est un admin
+   * @param {ActivatedRouteSnapshot} route - La route actuelle
+   * @param {RouterStateSnapshot} state - L'etat de la route
+   * @returns true si l'utilisateur est connecté et si il est un admin, false sinon
    */
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
-    if (this.authService.isAdmin()) {
-      return true;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (!this.authService.isLogged()) {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: state.url }
+      });
+      return false;
     }
 
-    console.log('AuthGuard: accès refusé, redirection vers /home');
-    this.router.navigate(['/home']);
-    return false;
+    if (!this.authService.isAdmin()) {
+      this.router.navigate(['/home']);
+      return false;
+    }
+
+    return true;
   }
 }
