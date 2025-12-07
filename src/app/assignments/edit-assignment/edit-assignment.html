@@ -1,0 +1,42 @@
+<h2>Modification du devoir</h2>
+
+@if (assignment) {
+  <form class="form" (submit)="onSubmit()">
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Nom du devoir"
+        [(ngModel)]="nomDevoir"
+        name="nomDevoir"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Date de rendu"
+        [(ngModel)]="dateDeRendu"
+        name="dateDeRendu"
+        required
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button
+      mat-stroked-button
+      type="submit"
+      color="primary"
+      [disabled]="!nomDevoir || !dateDeRendu"
+    >
+      Sauvegarder
+    </button>
+
+  </form>
+} 

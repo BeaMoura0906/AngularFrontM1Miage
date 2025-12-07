@@ -22,9 +22,17 @@
                     Rendu
                 </mat-checkbox>   
             }
-            <button mat-button class="deleteBtn" (click)="onDeleteClick()">
-                Supprimer
-            </button>
+
+            <div class="actions">
+                <button mat-button class="editBtn" (click)="onEditClick()">
+                    Modifier
+                </button>
+
+                <button mat-button class="deleteBtn" (click)="onDeleteClick()">
+                    Supprimer
+                </button>
+            </div>
+            
         </mat-card-actions>
     </mat-card>
 }

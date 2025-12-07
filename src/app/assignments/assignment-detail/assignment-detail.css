@@ -18,8 +18,23 @@
   color: #b02a37;
 }
 
-.deleteBtn {
+.actions {
   margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.actions button {
+  margin-left: 12px;
+}
+
+.actions .deleteBtn {
+  color: #b02a37;
+  border-color: #b02a37;
+}
+
+.actions .deleteBtn:hover {
   background-color: #b02a37;
   color: white;
 }

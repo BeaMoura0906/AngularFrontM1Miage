@@ -85,4 +85,20 @@ export class AssignmentDetail {
       });
   }
 
+  /**
+   * Ouvre l'éditeur de l'assignment
+   * @description Cette méthode ouvre l'éditeur de l'assignment correspondant à l'ID fourni en appelant le service AssignmentsService
+   * @returns void
+   */
+  onEditClick() {
+    if (!this.assignment) return;
+
+    this.router.navigate(
+      ['/assignment', this.assignment.id, 'edit'], 
+      {
+        queryParams: { nom: this.assignment.nom },
+        fragment: 'edition'
+      }
+    );
+  }
 }
