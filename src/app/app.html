@@ -1,7 +1,7 @@
 <mat-sidenav-container class="app-container">
     <mat-sidenav #drawer mode="side">
         <mat-nav-list>
-        <a mat-list-item routerLink="/assignments"
+        <a mat-list-item routerLink="/home"
             (click)="drawer.close()">Liste des devoirs</a>
         <a mat-list-item routerLink="/add"
             (click)="drawer.close()">Ajout d'un devoir</a>
@@ -20,11 +20,11 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <button mat-icon-button aria-label="Accueil" routerLink="/">
+        <button mat-icon-button aria-label="Accueil" routerLink="/home">
             <mat-icon>home</mat-icon>
         </button>
 
-        <span class="toolbar-title">Assignments App</span>
+        <span class="toolbar-title"><a routerLink="/home" class="link-home">Assignment App</a></span>
         <span class="spacer"></span>
 
         <button mat-icon-button aria-label="Connexion">

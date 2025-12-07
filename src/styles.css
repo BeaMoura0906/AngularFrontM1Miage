@@ -2,3 +2,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.link-home {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-home:hover {
+  text-decoration: underline;
+}
