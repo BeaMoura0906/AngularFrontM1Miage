@@ -1,23 +1,23 @@
-@if (assignmentTransmis) {
+@if (assignment) {
     <mat-card class="assignment-card">
         <mat-card-header>
-            <mat-card-title>{{ assignmentTransmis.nom }}</mat-card-title>
+            <mat-card-title>{{ assignment.nom }}</mat-card-title>
             <mat-card-subtitle>
-                Date de rendu : {{ assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy' }}
+                Date de rendu : {{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}
             </mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
             <p>
                 Statut :
-                <span class="status" [class.rendu]="assignmentTransmis.rendu" [class.non-rendu]="!assignmentTransmis.rendu">
-                    {{ assignmentTransmis.rendu ? 'Rendu' : 'Non rendu' }}
+                <span class="status" [class.rendu]="assignment.rendu" [class.non-rendu]="!assignment.rendu">
+                    {{ assignment.rendu ? 'Rendu' : 'Non rendu' }}
                 </span>
             </p>
         </mat-card-content>
 
         <mat-card-actions>
-            @if (!assignmentTransmis.rendu) {
+            @if (!assignment.rendu) {
                 <mat-checkbox (click)="onAssignmentRendu()">
                     Rendu
                 </mat-checkbox>   

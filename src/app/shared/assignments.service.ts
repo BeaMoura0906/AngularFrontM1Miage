@@ -43,6 +43,16 @@ export class AssignmentsService {
   }
 
   /**
+   * Renvoie un Observable qui contient l'assignment correspondant a l'ID fourni
+   * @param {number} id - L'ID de l'assignment a chercher
+   * @returns Observable<Assignment | undefined> - Un Observable qui contient l'assignment correspondant a l'ID fourni
+   */
+  getAssignment(id: number): Observable<Assignment | undefined> {
+    const assignment = this.assignments.find(a => a.id === id);
+    return of(assignment);
+  }
+
+  /**
    * Ajoute un assignment a la liste des assignments
    * @param {Assignment} assignment - L'assignment a ajouter
    * @returns Observable<string> - Un Observable qui contient le message de confirmation de l'ajout de l'assignment

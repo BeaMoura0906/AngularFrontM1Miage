@@ -12,7 +12,7 @@
 
     <h3 mat-subheader>{{ assignment.dateDeRendu | date: 'dd/MM/yyyy' }}</h3>
 
-    <mat-list-item (click)="assignmentSelectionne = assignment" style="cursor: pointer;">
+    <mat-list-item [routerLink]="['/assignment', assignment.id]" style="cursor: pointer;">
       @if ( assignment.rendu ) {
         <p appRendu>
           Le devoir {{ assignment.nom }} a été rendu.
@@ -28,9 +28,3 @@
 </mat-list>
 
 <mat-divider></mat-divider>
-
-<h2>Détails d'un assignment</h2>
-<app-assignment-detail 
-  [assignmentTransmis]="assignmentSelectionne"
-  (deleteAssignment)="onDelete($event)">
-</app-assignment-detail>

@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from '../../shared/assignments.service';  
 
 @Component({
@@ -14,34 +15,74 @@ import { AssignmentsService } from '../../shared/assignments.service';
 })
 
 export class AssignmentDetail {
-  @Input() assignmentTransmis?: Assignment;
-
-  @Output() deleteAssignment = new EventEmitter<Assignment>();
-
-  /**
-   * Met a jour l'assignment en cours pour le marquer comme rendu
-   */
-  onAssignmentRendu() {
-    if(!this.assignmentTransmis) return;
-    this.assignmentTransmis.rendu = true;
-
-    this.assignmentsService.updateAssignment(this.assignmentTransmis)
-      .subscribe(message => console.log(message));
-  }
-
-  /**
-   * Supprime l'assignment actuellement selectionné de la liste des assignments
-   * @returns void
-   */
-  onDeleteClick() {
-    if(!this.assignmentTransmis) return;
-    this.deleteAssignment.emit(this.assignmentTransmis);
-  }
+  assignment?: Assignment;
 
   /**
    * Constructeur de la classe AssignmentDetail
    * @param {AssignmentsService} assignmentsService - Le service AssignmentsService
+   * @param {ActivatedRoute} route - Le routeur actif
+   * @param {Router} router - Le routeur
    */
-  constructor(private assignmentsService: AssignmentsService) {}
+  constructor(
+    private assignmentsService: AssignmentsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  
+  /**
+   * Initialise la liste des assignments en récupérant l'assignment correspondant à l'ID fourni
+   */
+  ngOnInit(): void {
+    this.getAssignment();
+  }
+
+  /**
+   * Initialise la liste des assignments en récupérant l'assignment correspondant à l'ID fourni
+   * @description Cette méthode récupère l'assignment correspondant à l'ID fourni en appelant le service AssignmentsService
+   * @returns void
+   */
+  getAssignment() {
+    const id = +this.route.snapshot.params['id'];
+
+    this.assignmentsService.getAssignment(id)
+      .subscribe(a => {
+        this.assignment = a;
+      });
+  }
+
+  
+  /**
+   * Met a jour le statut de l'assignment en rendu
+   * @description Cette méthode met a jour le statut de l'assignment en rendu et appelle le service AssignmentsService pour mettre a jour l'assignment.
+   * @returns void
+   */
+  onAssignmentRendu() {
+    if (!this.assignment) return;
+
+    this.assignment.rendu = true;
+
+    this.assignmentsService.updateAssignment(this.assignment)
+      .subscribe((message) => {
+        console.log(message);
+        this.router.navigate(['/home']);
+      });
+  }
+
+  
+  /**
+   * Supprime l'assignment de la liste des assignments
+   * @description Cette méthode supprime l'assignment correspondant à l'ID fourni en appelant le service AssignmentsService
+   * @returns void
+   */
+  onDeleteClick() {
+    if (!this.assignment) return;
+
+    this.assignmentsService.deleteAssignment(this.assignment)
+      .subscribe((message) => {
+        console.log(message);
+        this.router.navigate(['/home']);
+      });
+  }
 
 }
