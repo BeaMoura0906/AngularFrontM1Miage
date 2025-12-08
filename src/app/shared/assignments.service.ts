@@ -3,6 +3,8 @@ import { Assignment } from '../assignments/assignment.model';
 import { Observable, of } from 'rxjs';
 import { Logging } from './logging';
 import { HttpClient } from '@angular/common/http';
+import { mockDataAssignments } from './data';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +92,22 @@ export class AssignmentsService {
         error: (err) => observer.error(err)
       });
     });
+  }
+
+  peuplerBDAvecForkJoin(): Observable<any> {
+    const appels: Observable<any>[] = [];
+
+    mockDataAssignments.forEach(a => {
+      const nouvelAssignment = new Assignment();
+      nouvelAssignment.id = a.id;
+      nouvelAssignment.nom = a.nom;
+      nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+      nouvelAssignment.rendu = a.rendu;
+
+      appels.push(this.addAssignment(nouvelAssignment));
+    });
+
+    return forkJoin(appels);
   }
   
 }

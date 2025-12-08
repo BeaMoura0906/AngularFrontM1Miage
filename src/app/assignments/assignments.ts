@@ -50,10 +50,20 @@ export class Assignments implements OnInit {
    * Initialise la liste des assignments en récupérant la liste des assignments du service AssignmentsService
    */
   ngOnInit(): void {
+    this.loadAssignments();
+  }
+
+  loadAssignments(): void {
     this.assignmentService.getAssignments()
       .subscribe((assignments) => {
         this.assignments = assignments;
       });
+  }
+  peuplerBD() {
+    this.assignmentService.peuplerBDAvecForkJoin().subscribe(() => {
+      console.log('Base peuplée !');
+      this.loadAssignments();
+    });
   }
 
 }

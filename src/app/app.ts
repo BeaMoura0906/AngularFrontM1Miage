@@ -30,6 +30,7 @@ export class App {
 
   /**
    * Constructeur de la classe App
+   * @param {AssignmentsService} assignmentsService - Le service AssignmentsService
    * @param {AuthService} authService - Le service AuthService
    * @param {Router} router - Le routeur
    */
