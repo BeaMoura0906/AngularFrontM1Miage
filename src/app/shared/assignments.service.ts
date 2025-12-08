@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
  */
 export class AssignmentsService {
   
-  private apiUrl = 'http://localhost:8010/api/assignments';
+  private apiUrl = 'https://api-angular-25-26-beamoura0906.onrender.com/api/assignments';
 
   constructor(
     private http: HttpClient,
