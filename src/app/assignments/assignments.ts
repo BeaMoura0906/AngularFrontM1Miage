@@ -40,6 +40,11 @@ import { RouterLink } from '@angular/router';
 export class Assignments implements OnInit {
   assignments: Assignment[] = [];
 
+  page = 1;
+  limit = 10;
+  totalDocs = 0;
+  totalPages = 0;
+
   /**
    * Constructeur de la classe Assignments
    * @param {AssignmentsService} assignmentService - Le service AssignmentsService
@@ -47,23 +52,85 @@ export class Assignments implements OnInit {
   constructor (private assignmentService:AssignmentsService) {}
 
   /**
-   * Initialise la liste des assignments en récupérant la liste des assignments du service AssignmentsService
+   * Initialise la liste des assignments en récupérant la liste des assignments à l'aide de loadAssignments()
+   * @returns void
    */
   ngOnInit(): void {
     this.loadAssignments();
   }
 
+  /**
+   * Recharge la liste des assignments en appelant le service AssignmentsService, et met a jour les variables de pagination.
+   * @returns void
+   */
   loadAssignments(): void {
-    this.assignmentService.getAssignments()
-      .subscribe((assignments) => {
-        this.assignments = assignments;
+    this.assignmentService.getAssignments(this.page, this.limit)
+      .subscribe({
+        next: (data) => {
+          this.assignments = data.docs;
+          this.totalDocs = data.totalDocs;
+          this.totalPages = data.totalPages;
+          this.page = data.page;
+        },
+        error: (err) => {
+          console.error('Erreur chargement assignments :', err);
+        }
       });
   }
+  
+  
+  /**
+   * Peuple la base de données en appelant le service AssignmentsService
+   * Affiche un message de confirmation de la peuplée de la base de données
+   * Recharge la liste des assignments en appelant la méthode loadAssignments()
+   * @returns void
+   */
   peuplerBD() {
     this.assignmentService.peuplerBDAvecForkJoin().subscribe(() => {
       console.log('Base peuplée !');
+      this.page = 1;
       this.loadAssignments();
     });
   }
 
+  
+  /**
+   * Passer a la page suivante si elle existe
+   */
+  pageSuivante(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.loadAssignments();
+    }
+  }
+
+  /**
+   * Passer a la page precedente si elle existe
+   */
+  pagePrecedente(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.loadAssignments();
+    }
+  }
+
+  /**
+   * Passer a la premiere page
+   */
+  premierePage(): void {
+    if (this.page !== 1) {
+      this.page = 1;
+      this.loadAssignments();
+    }
+  }
+
+  /**
+   * Passer a la derniere page
+   */
+  dernierePage(): void {
+    if (this.page !== this.totalPages) {
+      this.page = this.totalPages;
+      this.loadAssignments();
+    }
+  }
 }

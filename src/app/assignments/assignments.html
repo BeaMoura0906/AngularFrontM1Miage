@@ -32,3 +32,33 @@
 </mat-list>
 
 <mat-divider></mat-divider>
+
+<div class="pagination" style="margin-top: 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+  <button mat-raised-button color="primary"
+          (click)="premierePage()"
+          [disabled]="page === 1">
+    « Première
+  </button>
+
+  <button mat-raised-button color="primary"
+          (click)="pagePrecedente()"
+          [disabled]="page === 1">
+    ‹ Précédente
+  </button>
+
+  <span>
+    Page {{ page }} / {{ totalPages }} – {{ totalDocs }} assignments
+  </span>
+
+  <button mat-raised-button color="primary"
+          (click)="pageSuivante()"
+          [disabled]="page === totalPages">
+    Suivante ›
+  </button>
+
+  <button mat-raised-button color="primary"
+          (click)="dernierePage()"
+          [disabled]="page === totalPages">
+    Dernière »
+  </button>
+</div>

@@ -27,8 +27,8 @@ export class AssignmentsService {
    * Renvoie un Observable qui contient la liste des assignments
    * @returns Observable<Assignment[]>
    */
-  getAssignments(): Observable<Assignment[]> {
-    return this.http.get<Assignment[]>(this.apiUrl);
+  getAssignments(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?page=${page}&limit=${limit}`);
   }
 
   /**
@@ -94,6 +94,13 @@ export class AssignmentsService {
     });
   }
 
+  /**
+   * Peuple la base de données en appelant le service AssignmentsService
+   * pour chaque assignment de la liste mockDataAssignments, crée un nouvel assignment et l'ajoute au service AssignmentsService
+   * Affiche un message de confirmation de la peuplée de la base de données
+   * Recharge la liste des assignments en appelant la méthode loadAssignments()
+   * @returns Observable<any> - Un Observable qui contient le message de confirmation de la peuplée de la base de données
+   */
   peuplerBDAvecForkJoin(): Observable<any> {
     const appels: Observable<any>[] = [];
 
