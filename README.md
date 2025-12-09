@@ -1,53 +1,127 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=20571625&assignment_repo_type=AssignmentRepo)
-# Angular-start
-## Michel Buffa, Leo Donati, Université Côte d'Azur 
-Repository de démarrage pour vos TP de Angular
+# Assignment App – Angular / Node / MongoDB / Render  
+**M1 MIAGE – Projet Angular 2025–2026**  
+Auteur : *[Ton Nom]*
 
-C'est dans ce repository que vous allez créer votre projet Angular qui va évoluer tout au long du semestre.
+---
 
-Vous devez donc modifier ce README en ajoutant votre nom et l'avancement de votre projet, ainsi que d'éventuelles difficultés que vous avez eues ou des bonus que vous avez ajoutés par rapport à ce qui vous est demandé.
+## 🔗 URLs du projet
 
-* Si vous utilisez le github Codespace, alors dans votre machine virtuelle `npm`, `node` et `angular/CLI` sont déjà installés.
-* Pour cloner en local ce repository, il faut :
-   1. avoir installé `git` (ou `gitbash`) sur votre machine
-   1. créer un répertoire de travail et s'y déplacer
-   1. cloner le repository distant
+| Service | URL |
+|--------|-----|
+| **Frontend Angular** | https://angular-25-26-beamoura0906.onrender.com/ |
+| **Backend API Node** | https://api-angular-25-26-beamoura0906.onrender.com/api/assignments |
+| **Base MongoDB Atlas** | Cluster personnel (assignments + 500+ données mockées) |
+| **Backend Répertoire Git | https://github.com/BeaMoura0906/api-angular-25-26-BeaMoura0906 |
+
+---
+
+# 📝 Description du projet
+
+Cette application est une Single Page App en **Angular** consommant une **API Node/Express** connectée à **MongoDB Atlas**.  
+Elle permet de gérer des *assignments* (devoirs) avec :
+
+- Affichage paginé  
+- Détail d'un assignment  
+- Ajout / Modification / Suppression  
+- Marquage “rendu”  
+- Authentification (admin / user)  
+- Gestion des droits  
+- Déploiement complet sur Render (front + back)
+
+---
+
+# 🎯 Fonctionnalités implémentées
+
+- **CRUD complet** : affichage, détail, ajout, modification, suppression.
+- **Pagination** : backend paginé (Mongoose paginate) + navigation front.
+- **Authentification** : login/logout avec deux comptes (admin/user).
+- **Gestion des rôles** :
+  - Anonyme : lecture seule
+  - User : lecture seule (+ marquer rendu si activé)
+  - Admin : ajout, modification, suppression, peuplement
+- **Guards Angular** : protection des routes réservées à l’admin (/add, /edit).
+- **Peuplement de la base** : données Mockaroo + insertion massive via ForkJoin.
+- **MongoDB Atlas** : base cloud contenant plusieurs centaines d'assignments.
+- **Déploiement complet Render** : front Angular + back Node/Express.
+- **UI Material Design** : navigation, formulaires, liste stylée.
+
+---
+
+# ▶️ Installation & exécution locale
+
+## 1. Backend (API Node)
+
 ```bash
-git clone nom-du-repository
+cd api
+npm install
+node server.js
 ```
 
+## 2. Frontend (Angular)
 
+# ▶️ Installation & exécution locale
 
-### Pour vérifier que l'installation est complète
-
-```bash 
-npm --version
-node --version
-ng version
-```
-
-### Chaque fois que vous modifiez votre code 
+## 1. Backend (API Node)
 
 ```bash
-git pull            #pour synchroniser votre repo local avec le repo de github 
-git add -A          #pour informer git de suivre tous les fichiers présents dans le répertoire
-git commit -m "message descriptif"      #pour intégrer dans git les dernières modifications faites     
-git push            #pour synchroniser le repo github avec le repo local
+cd api
+npm install
+node server.js
 ```
 
-### Pour ajouter un tag (une étiquette) à l'état courant du repository sur github
+## 2. Frontend (Angular)
 
-Une étiquette TPXX doit être ajoutée à la fin de chaque séance de TP pour voir l'évolution progressif de votre travail.
+### Mode développement
 
 ```bash
-git tag NomEtiquette
-git push --tags
+cd assignment-app
+npm install
+ng serve
+```
+Disponible sur http://localhost:4200
+
+### Mode production
+
+```bash
+npm run build
+npm start
+```
+Disponible sur http://localhost:8081
+
+---
+# 🔐 Authentification
+
+Identifiants disponibles :
+
+``` bash
+admin / admin
+user / user
 ```
 
+Comportement :
 
+Anonyme → lecture seule
 
+User → lecture seule
 
+Admin → CRUD + peuplement de base
 
+---
 
+# 🏷️ Tag Git pour le rendu
 
+Le dépôt est tagué :
 
+```bash
+Rendu2
+```
+
+Les précédents TP sont également taggués.
+
+---
+
+# 👥 Auteur
+
+Beatriz MOURA | https://github.com/BeaMoura0906
+M1 MIAGE 2025-2026 - Projet Angular
+Université Cote d'Azur
