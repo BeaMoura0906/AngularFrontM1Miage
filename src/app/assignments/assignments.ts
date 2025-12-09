@@ -13,26 +13,27 @@ import { MatList, MatListSubheaderCssMatStyler, MatListItem  } from "@angular/ma
 import { Assignment } from './assignment.model';
 import { AssignmentsService } from '../shared/assignments.service';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../shared/auth';
 
 @Component({
   selector: 'app-assignments',
   standalone: true,
   imports: [
-    DatePipe, 
-    MatDividerModule, 
-    Rendu, 
-    NonRendu, 
-    FormsModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatButtonModule, 
-    MatDatepickerModule, 
-    MatNativeDateModule, 
-    MatList, 
-    MatListSubheaderCssMatStyler, 
+    DatePipe,
+    MatDividerModule,
+    Rendu,
+    NonRendu,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatList,
+    MatListSubheaderCssMatStyler,
     MatListItem,
     RouterLink
-  ],
+],
   templateUrl: './assignments.html',
   styleUrl: './assignments.css'
 })
@@ -49,7 +50,10 @@ export class Assignments implements OnInit {
    * Constructeur de la classe Assignments
    * @param {AssignmentsService} assignmentService - Le service AssignmentsService
    */
-  constructor (private assignmentService:AssignmentsService) {}
+  constructor (
+    private assignmentService:AssignmentsService,
+    private authService: AuthService
+  ) {}
 
   /**
    * Initialise la liste des assignments en récupérant la liste des assignments à l'aide de loadAssignments()
@@ -57,6 +61,10 @@ export class Assignments implements OnInit {
    */
   ngOnInit(): void {
     this.loadAssignments();
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   /**

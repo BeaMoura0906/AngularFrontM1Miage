@@ -64,6 +64,14 @@ export class AuthService {
   }
 
   /**
+   * Vérifie si l'utilisateur est un user
+   * @returns true si l'utilisateur est un user, false sinon
+   */
+  isUser(): boolean {
+    return this.currentUser?.role === 'user';
+  }
+
+  /**
    * Récupère l'utilisateur actuellement connecté
    * @returns L'utilisateur actuellement connecté, ou null si aucun utilisateur connecté
    */

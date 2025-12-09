@@ -1,12 +1,14 @@
-<div class="top-actions">
-  <button mat-raised-button routerLink="/add">
-    Ajouter un assignment
-  </button>
-  
-  <button mat-raised-button (click)="peuplerBD()">
-    Peupler la base d’assignments
-  </button>
-</div>
+@if (isAdmin()) {
+  <div class="top-actions">
+    <button mat-raised-button routerLink="/add">
+      Ajouter un assignment
+    </button>
+    
+    <button mat-raised-button (click)="peuplerBD()">
+      Peupler la base d’assignments
+    </button>
+  </div>
+}
 
 <h1>Liste des assignments</h1>
 

@@ -41,6 +41,13 @@ export class AssignmentDetail {
   }
   
   /**
+   * Returns true if the user is a user, false otherwise.
+   * @returns boolean
+   */
+  isUser(): boolean {
+    return this.authService.isUser();
+  }
+  /**
    * Initialise la liste des assignments en récupérant l'assignment correspondant à l'ID fourni
    */
   ngOnInit(): void {

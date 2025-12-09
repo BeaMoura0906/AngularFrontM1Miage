@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.form button[mat-stroked-button] {
+  margin-top: -15px;
+}
