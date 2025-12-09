@@ -1,6 +1,4 @@
 # Assignment App – Angular / Node / MongoDB / Render  
-**M1 MIAGE – Projet Angular 2025–2026**  
-Auteur : *[Ton Nom]*
 
 ---
 
@@ -15,7 +13,7 @@ Auteur : *[Ton Nom]*
 
 ---
 
-# 📝 Description du projet
+## 📝 Description du projet
 
 Cette application est une Single Page App en **Angular** consommant une **API Node/Express** connectée à **MongoDB Atlas**.  
 Elle permet de gérer des *assignments* (devoirs) avec :
@@ -30,7 +28,7 @@ Elle permet de gérer des *assignments* (devoirs) avec :
 
 ---
 
-# 🎯 Fonctionnalités implémentées
+## 🎯 Fonctionnalités implémentées
 
 - **CRUD complet** : affichage, détail, ajout, modification, suppression.
 - **Pagination** : backend paginé (Mongoose paginate) + navigation front.
@@ -47,21 +45,9 @@ Elle permet de gérer des *assignments* (devoirs) avec :
 
 ---
 
-# ▶️ Installation & exécution locale
+## ▶️ Installation & exécution locale
 
-## 1. Backend (API Node)
-
-```bash
-cd api
-npm install
-node server.js
-```
-
-## 2. Frontend (Angular)
-
-# ▶️ Installation & exécution locale
-
-## 1. Backend (API Node)
+### 1. Backend (API Node)
 
 ```bash
 cd api
@@ -69,7 +55,7 @@ npm install
 node server.js
 ```
 
-## 2. Frontend (Angular)
+### 2. Frontend (Angular)
 
 ### Mode développement
 
@@ -80,7 +66,7 @@ ng serve
 ```
 Disponible sur http://localhost:4200
 
-### Mode production
+#### Mode production
 
 ```bash
 npm run build
@@ -89,7 +75,7 @@ npm start
 Disponible sur http://localhost:8081
 
 ---
-# 🔐 Authentification
+## 🔐 Authentification
 
 Identifiants disponibles :
 
@@ -108,7 +94,7 @@ Admin → CRUD + peuplement de base
 
 ---
 
-# 🏷️ Tag Git pour le rendu
+## 🏷️ Tag Git pour le rendu
 
 Le dépôt est tagué :
 
@@ -120,7 +106,7 @@ Les précédents TP sont également taggués.
 
 ---
 
-# 👥 Auteur
+## 👥 Auteur
 
 Beatriz MOURA | https://github.com/BeaMoura0906
 M1 MIAGE 2025-2026 - Projet Angular
